@@ -1,0 +1,32 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="slam_methods" default="gmapping" doc="slam type [gmapping, cartographer, hector, karto, frontier_exploration]"/>
+  <arg name="open_rviz" default="true"/>
+
+  <param name="use_sim_time" value="true"/>
+
+  <!-- SLAM: Gmapping, Cartographer, Hector, Karto, Frontier_exploration, RTAB-Map -->
+  <include file="$(find p3dxbot)/launch/p3dx_$(arg slam_methods).launch">
+  </include>
+
+  <!--P3dx World and Robot-->
+  <include file="$(find p3dxbot)/launch/p3dxworld.launch" >
+   </include>
+
+     <!--Depth image to laserscan-->
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan" args="image:=/kinect_V2/depth/image_raw" >
+    <param name="range_min" value="1.5"/>
+    <param name="output_frame_id" value="p3dx/base_scan"/>
+    <param name="scan_time" value = "0.005"/>
+  </node>
+
+  <!--Transform between Base_link and Camera_link-->
+  <node pkg="tf" type="static_transform_publisher" name="kinect_broadcaster" args="0 0 0 0 0 0 1 p3dx/chassis p3dx/base_scan 10" />
+
+  <!-- rviz -->
+  <group if="$(arg open_rviz)"> 
+    <node pkg="rviz" type="rviz" name="rviz" required="true"
+          args="-d $(find p3dxbot)/rviz/p3dxbot_$(arg slam_methods).rviz"/>
+  </group>
+
+</launch>

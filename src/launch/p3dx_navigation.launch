@@ -1,0 +1,40 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="map_file" default="$(find p3dxbot)/maps/barragem_rtab.yaml"/>
+  <arg name="move_forward_only" default="true"/>
+  <arg name="open_rviz" default="true"/>
+
+  <param name="use_sim_time" value="true"/>
+
+   <!-- Map server -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+  <!--P3dx World and Robot-->
+  <include file="$(find p3dxbot)/launch/p3dxworld.launch" >
+   </include>
+
+  <!--Depth image to laserscan-->
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan" args="image:=/kinect_V2/depth/image_raw" >
+    <param name="range_min" value="1.5"/>
+    <param name="output_frame_id" value="camera_link"/>
+    <param name="scan_time" value = "0.005"/>
+  </node>
+
+  <!--Transform between Base_link and Camera_link-->
+  <node pkg="tf" type="static_transform_publisher" name="kinect_broadcaster" args="0 0 0 0 0 0 1 p3dx/odom camera_link 50" /> 
+
+  <!-- AMCL -->
+  <include file="$(find p3dxbot)/launch/p3dx_amcl.launch"/>
+
+  <!-- move_base -->
+  <include file="$(find p3dxbot)/launch/p3dx_move_base.launch">
+    <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+  </include>
+
+  <!-- rviz -->
+  <group if="$(arg open_rviz)"> 
+    <node pkg="rviz" type="rviz" name="rviz" required="true"
+          args="-d $(find p3dxbot)/rviz/p3dx_navigation.rviz"/>
+  </group>
+
+</launch>

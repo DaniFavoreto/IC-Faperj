@@ -1,0 +1,24 @@
+obstacle_range: 2.5
+raytrace_range: 3.0
+inflation_radius: 0.55
+
+#---standard pioneer footprint---
+
+#---(in inches)---
+#footprint: [ [10, -2], [7, -2], [7, -7], [-7.5, -7], [-10, 0], [-7.5, 7], [7, 7], [7, 2], [10, 2] ]
+
+#---(in meters)---
+footprint: [ [0.254, -0.0508], [0.1778, -0.0508], [0.1778, -0.1778], [-0.1905, -0.1778], [-0.254, 0], [-0.1905, 0.1778], [0.1778, 0.1778], [0.1778, 0.0508], [0.254, 0.0508] ]
+
+#---pioneer AT footprint:---
+
+#---(in inches)---
+#footprint: [ [13, -2], [10, -2], [10, -10], [-10, -10], [-10, 10], [10, 10], [10, 2], [13, 2] ]
+
+#---(in meters)---
+# footprint: [ [0.3302, -0.0508], [0.254, -0.0508], [0.254, -0.254], [-0.254, -0.254], [-0.254, 0.254], [0.254, 0.254], [0.254, 0.0508], [0.3302, 0.0508] ]
+
+transform_tolerance: 2
+
+observation_sources: scan
+scan: {sensor_frame: p3dx/base_scan, topic: /scan, data_type: LaserScan, clearing: true, marking: true}

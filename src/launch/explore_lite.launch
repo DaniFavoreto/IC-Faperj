@@ -1,0 +1,75 @@
+<launch>
+    <!-- Arguments -->
+  <arg name="slam_methods" default="rtab"/>
+  <arg name="open_rviz" default="true"/>
+  <arg name="localization"      default="false"/>
+  <arg     if="$(arg localization)" name="rtabmap_args"  default=""/>
+  <arg unless="$(arg localization)" name="rtabmap_args"  default="--delete_db_on_start"/>  
+
+  <param name="use_sim_time" value="true"/>
+
+  <!--P3dx World and Robot-->
+  <include file="$(find p3dxbot)/launch/p3dxworld.launch" >
+   </include>
+
+  <!--Depth image to laserscan-->
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan" args="image:=/kinect_V2/depth/image_raw" >
+    <param name="range_min" value="1.5"/>
+    <param name="output_frame_id" value="base_scan"/>
+    <param name="scan_time" value = "0.005"/>
+  </node>
+
+  <!--Transform between Base_link and Camera_link-->
+  <node pkg="tf" type="static_transform_publisher" name="kinect_broadcaster" args="0 0 0 0 0 0 1 p3dx/chassis base_scan 50" />
+
+  <!-- SLAM -->
+  <group ns="rtabmap">
+
+    <node pkg="nodelet" type="nodelet" name="rgbd_sync" args="standalone rtabmap_ros/rgbd_sync" output="screen">
+      <remap from="rgb/image"       to="/kinect_V2/rgb/image_raw"/>
+      <remap from="depth/image"     to="/kinect_V2/depth/image_raw"/>
+      <remap from="rgb/camera_info" to="/kinect_V2/rgb/camera_info"/>
+      <remap from="rgbd_image"      to="rgbd_image"/> <!-- output -->
+      
+      <!-- Should be true for not synchronized camera topics 
+           (e.g., false for kinectv2, zed, realsense, true for xtion, kinect360)-->
+      <param name="approx_sync"       value="true"/> 
+    </node>
+
+    <node name="rtabmap" pkg="rtabmap_ros" type="rtabmap" output="screen" args="--delete_db_on_start">
+          <param name="frame_id" type="string" value="p3dx/base_link"/>
+          <param name="odom_tf_linear_variance" value="0.0001"/> <!-- adjust depending on real odom error -->
+          <param name="odom_tf_angular_variance" value="0.0005"/> <!-- adjust depending on real odom error -->
+
+          <param name="subscribe_depth" type="bool" value="false"/>
+          <param name="subscribe_rgbd" type="bool" value="true"/>
+
+          <remap from="odom" to="/p3dx/odom"/>
+         
+
+          <remap from="rgbd_image" to="rgbd_image"/>
+
+
+          <param name="queue_size" type="int" value="10"/>
+
+          <!-- RTAB-Map's parameters -->
+          <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>
+          <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>
+          <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>
+          <param name="Grid/RangeMin" type= "string" value ="1.5"/>
+    </node>
+</group>
+  
+
+
+
+   
+
+         <!-- rviz -->
+    <group if="$(arg open_rviz)"> 
+        <node pkg="rviz" type="rviz" name="rviz" required="true"
+              args="-d $(find p3dxbot)/rviz/p3dxbot_$(arg slam_methods).rviz"/>
+      </group>
+    
+
+</launch>
