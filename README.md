@@ -5,8 +5,8 @@
  <a href="#tecnologias">Tecnologias</a> • 
  <a href="#requisitos">Requisitos</a> • 
  <a href="#instalação">Instalação</a> • 
- <a href="#licenc-a">Licença</a> • 
- <a href="#autor">Autor</a>
+ <a href="#como-usar">Como usar</a> • 
+ <a href="#testes">Testes</a>
 </p>
 
 ## Descrição
@@ -42,6 +42,29 @@ Essa lista de comandos pode ser vista também pelo site oficial do ROS http://wi
     
 ### Instalação dos pacotes
 
+#### Depth-image-to-laserscan
+Instalamos esse pacote para converter a imagem obtida pelo kinect em um tópico /scan utilizável pelos métodos slam. Para instalar rode o seguinte comando:
+
+    sudo apt-get install ros-melodic-depthimage-to-laserscan
+
+#### Gmapping
+Para instalar o método slam gmapping, rode o seguinte comando:
+    
+    sudo apt-get install ros-melodic-slam-gmapping
+    
+#### Rtab-map
+Para instalar o método slam rtab-map, rode o seguinte comando:
+
+    sudo apt-get install ros-melodic-rtabmap-ros
+   
+#### Navegação
+Para a navegação funcionar, é necessário instalar o seguinte pacote:
+
+    sudo apt-get install ros-melodic-navigation
+
+#### Explore_lite
+
+    sudo apt-get install ros-melodic-explore-lite
 
 ## Como usar
 Com todos os requisitos instalados, basta configurar seu workspace para utilizar o ROS. Os próximos comandos também podem ser visualizados no site oficial do ROS http://wiki.ros.org/pt_BR/ROS/Tutorials/InstallingandConfiguringROSEnvironment.
@@ -89,16 +112,23 @@ Caso esteja utilizando uma máquina virtual, será necessário adicionar o segui
 
 ![kkk3](https://user-images.githubusercontent.com/39687418/127230144-6977d4bd-9733-4d29-8f11-51d2e037ec41.PNG)
 
-Por fim, basta clonar esse repositório dentro da pasta src do catkin_ws com o nome de p3dxbot e dar um catkin make:
+Basta clonar esse repositório dentro da pasta src do catkin_ws com o nome de p3dxbot e dar um catkin make:
     
     cd ~/catkin_ws/src
     git clone https://github.com/DaniFavoreto/IC-Faperj.git p3dxbot
     cd ~/catkin_ws/
     catkin_make
 
+Por fim, tornamos nossos arquivos python executáveis:
 
+    cd ~/catkin_ws/src/p3dxbot/src/scripts/
+    chmod +x gen_map_csv.py 
+    chmod +x gen_odom_csv.py 
+    chmod +x p3dxbot_goal.py 
+    chmod +x p3dx_teleop_key.py
+    cd ~
 
-
+## Testes
 
 
 
