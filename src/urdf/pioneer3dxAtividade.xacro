@@ -7,7 +7,7 @@
 
   <!-- Import robot -->
   <xacro:include filename="$(find p3dxbot)/robot/pioneer3dx_body.xacro"/>
-  <xacro:pioneer3dx_body name="chassis" parent="base_link" meshes="$(find p3dxbot)/robot/meshes/p3dx"/>
+  <xacro:pioneer3dx_body name="chassis" parent="base_link" meshes="package://p3dxbot/robot/meshes/p3dx"/>
 
   <!-- Import Kinect -->
 <xacro:include filename="$(find p3dxbot)/robot/kinect/kinect_v2.urdf.xacro" />

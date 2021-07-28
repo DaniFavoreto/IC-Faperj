@@ -12,7 +12,6 @@ Panels:
         - /Image1
         - /Map1
         - /Map1/Status1
-        - /ColorOccupancyGrid1
       Splitter Ratio: 0.594406008720398
     Tree Height: 239
   - Class: rviz/Selection
@@ -33,7 +32,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan
+    SyncSource: Image
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -192,7 +191,7 @@ Visualization Manager:
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: LaserScan
-      Position Transformer: XYZ
+      Position Transformer: ""
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
@@ -221,22 +220,10 @@ Visualization Manager:
       Draw Behind: false
       Enabled: true
       Name: Map
-      Topic: /rtabmap/grid_map
+      Topic: /grid_map
       Unreliable: false
       Use Timestamp: false
       Value: true
-    - Class: octomap_rviz_plugin/ColorOccupancyGrid
-      Enabled: true
-      Max. Height Display: 3.4028234663852886e+38
-      Max. Octree Depth: 16
-      Min. Height Display: -3.4028234663852886e+38
-      Name: ColorOccupancyGrid
-      Octomap Topic: /rtabmap/octomap_binary
-      Queue Size: 5
-      Value: true
-      Voxel Alpha: 1
-      Voxel Coloring: Z-Axis
-      Voxel Rendering: Occupied Voxels
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -265,25 +252,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 19.264076232910156
+      Distance: 25.912202835083008
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -14.620862007141113
-        Y: -9.950554847717285
-        Z: 4.9287519454956055
+        X: -13.842610359191895
+        Y: -7.916305065155029
+        Z: 5.675012588500977
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8397963643074036
+      Pitch: 0.8047959804534912
       Target Frame: map
       Value: Orbit (rviz)
-      Yaw: 3.1631855964660645
+      Yaw: 3.253187894821167
     Saved: ~
 Window Geometry:
   Displays:
@@ -303,5 +290,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1279
-  X: 439
-  Y: 27
+  X: 111
+  Y: 70
