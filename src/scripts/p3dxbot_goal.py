@@ -91,7 +91,7 @@ def rotate (angular_speed_degree, relative_angle_degree, clockwise):
     t0 = rospy.Time.now().to_sec()
 
     while True :
-        rospy.loginfo("Turtlesim rotates")
+        rospy.loginfo("p3dx rotates")
         velocity_publisher.publish(velocity_message)
 
         t1 = rospy.Time.now().to_sec()
