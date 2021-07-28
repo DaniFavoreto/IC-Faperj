@@ -7,7 +7,7 @@
  <a href="#instalação">Instalação</a> • 
  <a href="#como-usar">Como usar</a> • 
  <a href="#testes">Testes</a> • 
- <a href="#experimental">Experimental</a> • 
+ <a href="#experimental">Experimental</a> 
 </p>
 
 ## Descrição
