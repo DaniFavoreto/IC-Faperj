@@ -63,6 +63,7 @@ Para a navegação funcionar, é necessário instalar o seguinte pacote:
     sudo apt-get install ros-melodic-navigation
 
 #### Explore_lite
+Esse método é para a navegação automática, sem que exista a necessidade de selecionar end-points.
 
     sudo apt-get install ros-melodic-explore-lite
 
