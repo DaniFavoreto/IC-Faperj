@@ -1,0 +1,7 @@
+image: /home/daniel/barragem_rtab.pgm
+resolution: 0.050000
+origin: [-19.175001, -16.925001, 0.000000]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+
