@@ -131,6 +131,14 @@ Por fim, tornamos nossos arquivos python executáveis:
 
 ## Testes
 
+Para verificar que o mundo e o robô estão funcionando e tudo está instalado corretamente, comece rodando o seguinte comando:
 
+    roslaunch p3dxbot p3dxworld.launch
+
+É possível controlar a movimentação do robô com o script p3dx_teleop_key, usando as teclas w a s d:
+
+    rosrun p3dxbot p3dx_teleop_key.py
+    
+Para 
 
 
