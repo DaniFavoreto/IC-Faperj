@@ -3,14 +3,14 @@
   <xacro:arg name="imu_visual"   default="true"/>
 
   <!-- Import Rviz colors -->
-  <xacro:include filename="$(find gazebo_plugins)/test/multi_robot_scenario/xacro/materials.xacro" />
+  <xacro:include filename="$(find p3dxbot)/robot/materials.xacro" />
 
   <!-- Import robot -->
-  <xacro:include filename="$(find gazebo_plugins)/test/multi_robot_scenario/xacro/p3dx/pioneer3dx_body.xacro"/>
-  <xacro:pioneer3dx_body name="chassis" parent="base_link" meshes="package://gazebo_plugins/test/multi_robot_scenario/meshes/p3dx"/>
+  <xacro:include filename="$(find p3dxbot)/robot/pioneer3dx_body.xacro"/>
+  <xacro:pioneer3dx_body name="chassis" parent="base_link" meshes="$(find p3dxbot)/robot/meshes/p3dx"/>
 
   <!-- Import Kinect -->
-<xacro:include filename="$(find kinect_v2)/urdf/kinect_v2.urdf.xacro" />
+<xacro:include filename="$(find p3dxbot)/robot/kinect/kinect_v2.urdf.xacro" />
 
 <xacro:kinect_v2  parent="chassis">
         <origin xyz="0.07 0 0.238" rpy="0 0 0"/>
